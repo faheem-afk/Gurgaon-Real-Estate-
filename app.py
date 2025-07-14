@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import joblib
 
+if 'result' not in st.session_state:
+    st.session_state.result = ''
     
 st.set_page_config(page_title='viz Demo')
 
@@ -40,7 +42,9 @@ if st.button('Predict'):
     low = round((pred - 0.24), 2)
     high = round((pred + 0.24), 2)
     
-    
-    st.text("The price of the {property_type} is between {low} Cr and {high} Cr".format(property_type=property_type, low=low, high=high))
+    st.session_state.result = "The price of the {property_type} is between {low} Cr and {high} Cr".format(property_type=property_type, low=low, high=high) 
+
+if st.session_state.result:
+    st.text(st.session_state.result)
 
     
