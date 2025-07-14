@@ -30,8 +30,11 @@ if st.button('Predict'):
 
     with open('model.pkl', 'rb') as f:
         pipeline = pickle.load(f)
-        
     pred = pipeline.predict(data)
+    
+    with open('df.pkl', 'rb') as f:
+        df = pickle.dump(f)
+        
 
     pred = np.expm1(pred)[0]
     
