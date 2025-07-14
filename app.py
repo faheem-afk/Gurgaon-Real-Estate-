@@ -19,6 +19,9 @@ servant_room = st.selectbox('Servant Room', ['Yes', 'No'])
 study_room = st.selectbox('Study Room', ['Yes', 'No'])
 luxury_type = st.selectbox('Luxury Type', ['Low', 'Medium', 'High'])
 
+@st.cache_resource
+def show_text(property_type, low, high):
+    st.text("The price of the {property_type} is between {low} Cr and {high} Cr".format(property_type=property_type, low=low, high=high))
         
 if st.button('Predict'):
     
@@ -41,6 +44,7 @@ if st.button('Predict'):
     low = round((pred - 0.24), 2)
     high = round((pred + 0.24), 2)
     
-    st.text("The price of the {property_type} is between {low} Cr and {high} Cr".format(property_type=property_type, low=low, high=high))
+    
+    show_text(property_type, low, high)
 
     
