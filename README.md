@@ -1,8 +1,3 @@
-Here’s your cleaned, professional, and well-formatted README.md version in GitHub-friendly Markdown:
-
-⸻
-
-
 # 🏙️ Gurgaon Real Estate Price Prediction
 
 This project aims to predict property prices in **Gurgaon, India**, using a machine learning pipeline trained on real estate data scraped from **99acres.com**.  
