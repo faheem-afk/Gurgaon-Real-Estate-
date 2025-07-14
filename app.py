@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import pickle 
 import numpy as np
-
+import sklearn
+import xgboost
+import category_encoders
     
 st.set_page_config(page_title='viz Demo')
 
