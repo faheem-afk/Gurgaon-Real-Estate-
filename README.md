@@ -138,8 +138,8 @@ xgboost==3.0.2
 🚀 How to Run
 
 # 1. Clone the repo
-git clone https://github.com/yourusername/gurgaon-real-estate.git
-cd gurgaon-real-estate
+git clone https://github.com/faheem-afk/Gurgaon-Real-Estate-.git
+cd Gurgaon-Real-Estate-
 
 # 2. Install dependencies
 pip install -r requirements.txt
