@@ -1,3 +1,8 @@
+Here’s your cleaned, professional, and well-formatted README.md version in GitHub-friendly Markdown:
+
+⸻
+
+
 # 🏙️ Gurgaon Real Estate Price Prediction
 
 This project aims to predict property prices in **Gurgaon, India**, using a machine learning pipeline trained on real estate data scraped from **99acres.com**.  
@@ -126,3 +131,36 @@ streamlit==1.45.1
 scikit-learn==1.6.1
 category_encoders==2.8.1
 xgboost==3.0.2
+
+
+⸻
+
+🚀 How to Run
+
+# 1. Clone the repo
+git clone https://github.com/yourusername/gurgaon-real-estate.git
+cd gurgaon-real-estate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Launch the Streamlit app
+streamlit run app.py
+
+
+⸻
+
+🔍 Future Work
+	•	Integrate image data from listings
+	•	Model stacking for ensemble learning
+	•	Explore LightGBM or advanced hyperparameter tuning
+	•	Add date-based or location-based filters
+
+⸻
+
+👤 Author
+
+Faheem Bhat
+This project is part of a capstone portfolio in Data Science and Real Estate Analytics.
+
+⸻
