@@ -5,6 +5,9 @@ import numpy as np
 
 st.set_page_config(page_title='viz Demo')
 
+with open('df.pkl', 'rb') as f:
+        df = pickle.dump(f)
+        
 st.header('Gurgaon Real Estate Prediction')
 property_type = st.selectbox('Property Type', ['flat', 'house'])
 sector = st.selectbox('Sector', sorted(df['sector'].unique().tolist()))
@@ -31,10 +34,6 @@ if st.button('Predict'):
     with open('model.pkl', 'rb') as f:
         pipeline = pickle.load(f)
     pred = pipeline.predict(data)
-    
-    with open('df.pkl', 'rb') as f:
-        df = pickle.dump(f)
-        
 
     pred = np.expm1(pred)[0]
     
