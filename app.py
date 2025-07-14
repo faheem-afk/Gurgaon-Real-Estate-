@@ -24,7 +24,7 @@ study_room = st.selectbox('Study Room', ['Yes', 'No'])
 luxury_type = st.selectbox('Luxury Type', ['Low', 'Medium', 'High'])
 
 with open('model.pkl', 'rb') as f:
-        pipeline = pickle.load(f)
+        pipe = pickle.load(f)
         
 if st.button('Predict'):
     
@@ -40,7 +40,7 @@ if st.button('Predict'):
     })
 
     
-    pred = pipeline.predict(data)
+    pred = pipe.predict(data)
 
     pred = np.expm1(pred)[0]
     
