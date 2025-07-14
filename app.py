@@ -3,10 +3,14 @@ import pandas as pd
 import pickle 
 import numpy as np
 
+    
 st.set_page_config(page_title='viz Demo')
 
 with open('df.pkl', 'rb') as f:
         df = pickle.load(f)
+
+with open('model.pkl', 'rb') as f:
+        pipe = pickle.load(f)
         
 st.header('Gurgaon Real Estate Prediction')
 property_type = st.selectbox('Property Type', ['flat', 'house'])
@@ -18,8 +22,7 @@ servant_room = st.selectbox('Servant Room', ['Yes', 'No'])
 study_room = st.selectbox('Study Room', ['Yes', 'No'])
 luxury_type = st.selectbox('Luxury Type', ['Low', 'Medium', 'High'])
 
-with open('model.pkl', 'rb') as f:
-        pipe = pickle.load(f)
+
         
 if st.button('Predict'):
     
