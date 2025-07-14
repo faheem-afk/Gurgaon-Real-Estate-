@@ -18,6 +18,9 @@ servant_room = st.selectbox('Servant Room', ['Yes', 'No'])
 study_room = st.selectbox('Study Room', ['Yes', 'No'])
 luxury_type = st.selectbox('Luxury Type', ['Low', 'Medium', 'High'])
 
+with open('model.pkl', 'rb') as f:
+        pipeline = pickle.load(f)
+        
 if st.button('Predict'):
     
     data  = pd.DataFrame({
@@ -31,8 +34,7 @@ if st.button('Predict'):
     'luxury_category':[luxury_type]
     })
 
-    with open('model.pkl', 'rb') as f:
-        pipeline = pickle.load(f)
+    
     pred = pipeline.predict(data)
 
     pred = np.expm1(pred)[0]
