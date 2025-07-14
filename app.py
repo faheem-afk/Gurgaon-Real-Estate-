@@ -7,9 +7,8 @@ import joblib
 st.set_page_config(page_title='viz Demo')
 
 df = pd.read_csv('df.csv')
+pipeline = joblib.load('model.joblib')
 
-
-        
 st.header('Gurgaon Real Estate Prediction')
 property_type = st.selectbox('Property Type', ['flat', 'house'])
 sector = st.selectbox('Sector', sorted(df['sector'].unique().tolist()))
@@ -34,7 +33,7 @@ if st.button('Predict'):
     'luxury_category':[luxury_type]
     })
 
-    pipeline = joblib.load('model.joblib')
+    
     pred = pipeline.predict(data)
 
     pred = np.expm1(pred)[0]
