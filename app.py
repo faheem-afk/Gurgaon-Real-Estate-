@@ -8,12 +8,6 @@ st.set_page_config(page_title='viz Demo')
 
 df = pd.read_csv('df.csv')
 
-import joblib
-
-try:
-    pipeline = joblib.load('model.joblib')
-except Exception as e:
-    print("Failed to load:", type(e), str(e))
 
         
 st.header('Gurgaon Real Estate Prediction')
@@ -25,7 +19,6 @@ area = float(st.number_input('Area (sqft)', min_value=0.0))
 servant_room = st.selectbox('Servant Room', ['Yes', 'No'])
 study_room = st.selectbox('Study Room', ['Yes', 'No'])
 luxury_type = st.selectbox('Luxury Type', ['Low', 'Medium', 'High'])
-
 
         
 if st.button('Predict'):
@@ -41,7 +34,7 @@ if st.button('Predict'):
     'luxury_category':[luxury_type]
     })
 
-    
+    pipeline = joblib.load('model.joblib')
     pred = pipeline.predict(data)
 
     pred = np.expm1(pred)[0]
