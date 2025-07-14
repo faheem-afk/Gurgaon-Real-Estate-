@@ -8,7 +8,12 @@ st.set_page_config(page_title='viz Demo')
 
 df = pd.read_csv('df.csv')
 
-pipeline = joblib.load('model.joblib')
+import joblib
+
+try:
+    pipeline = joblib.load('model.joblib')
+except Exception as e:
+    print("Failed to load:", type(e), str(e))
 
         
 st.header('Gurgaon Real Estate Prediction')
