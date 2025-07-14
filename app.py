@@ -6,7 +6,7 @@ import numpy as np
 st.set_page_config(page_title='viz Demo')
 
 with open('df.pkl', 'rb') as f:
-        df = pickle.dump(f)
+        df = pickle.load(f)
         
 st.header('Gurgaon Real Estate Prediction')
 property_type = st.selectbox('Property Type', ['flat', 'house'])
