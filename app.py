@@ -37,7 +37,7 @@ if st.button('Predict'):
     })
 
     
-    pred = pipe.predict(data)
+    pred = pipeline.predict(data)
 
     pred = np.expm1(pred)[0]
     
