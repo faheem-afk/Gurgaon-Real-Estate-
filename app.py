@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import pickle 
 import numpy as np
-# from sklearn.pipeline import Pipeline
-# from sklearn.preprocessing import OneHotEncoder, StandardScaler, OrdinalEncoder
-# from xgboost import XGBRegressor 
-# import category_encoders as ce
-# from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, OrdinalEncoder
+from xgboost import XGBRegressor 
+import category_encoders as ce
+from sklearn.compose import ColumnTransformer
 
 st.set_page_config(page_title='viz Demo')
 
