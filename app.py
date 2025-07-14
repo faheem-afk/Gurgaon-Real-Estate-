@@ -10,7 +10,6 @@ st.set_page_config(page_title='viz Demo')
 
 with open('df.pkl', 'rb') as f:
         df = pickle.load(f)
-
 with open('model.pkl', 'rb') as f:
         pipe = pickle.load(f)
         
