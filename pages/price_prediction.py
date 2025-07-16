@@ -3,11 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-st.set_page_config(page_title='Gurgaon Property Price Predictor', layout="centered")
-
-# Session state for result
-if 'result' not in st.session_state:
-    st.session_state.result = ''
+st.set_page_config(page_title='prediction page', layout="centered")
 
 # Load data & model
 df = pd.read_csv('df.csv')
@@ -55,7 +51,7 @@ if st.button('🔮 Predict Price'):
     high = round(pred + 0.24, 2)
 
     st.session_state.result = f"💰 The predicted price for the **{property_type}** is between **₹{low} Cr** and **₹{high} Cr**."
-
-# Show result persistently
-if st.session_state.result:
     st.success(st.session_state.result)
+
+
+    

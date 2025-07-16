@@ -1,3 +1,4 @@
+import seaborn as sns
 import pandas as pd
 import streamlit as st
 import pandas as pd
@@ -12,6 +13,17 @@ group_df = pd.read_csv("datasets/group_df.csv")
 fig = px.scatter_mapbox(group_df, lat='latitude', lon='longitude', color='price_per_sqft', size='builtUpArea', 
                 color_continuous_scale=px.colors.cyclical.IceFire, zoom=10,
                 mapbox_style="open-street-map", width=1200, height=600, hover_name=group_df.index)
+
+fig.update_layout(
+    coloraxis_colorbar=dict(
+        x=.97,         # Pushes the colorbar to the right, outside the plot
+        xanchor="left",
+        len=0.75,       # Optional: vertical length
+        thickness=15    # Optional: bar width
+    ),
+    margin=dict(l=0, r=80, t=50, b=20)  # Increase right margin to avoid cutoff
+)
+
 st.plotly_chart(fig, use_container_width=True)
 
 
@@ -48,3 +60,24 @@ else:
     fig = px.pie(pie_df, names='bedRoom')
 
 st.plotly_chart(fig, use_container_width=True)
+
+
+st.header("Price variation per BHK")
+property_type = st.selectbox('🏠 property_type', ['Overall', 'flat', 'house'])
+if property_type == "Overall":
+    temp_df = df[df['bedRoom'] <= 4]
+else:
+    property_specific_df = df[df['property_type'] == property_type]
+    temp_df = property_specific_df[property_specific_df['bedRoom'] <= 4]
+fig = px.box(temp_df, x='bedRoom', y='price')
+st.plotly_chart(fig, use_container_width=True)
+
+
+
+st.header("Price Distribution")
+
+fig = plt.figure(figsize=(6, 4))
+sns.histplot(data=df[df['property_type'] == 'house'], x='price', color='blue', label='House', kde=True, stat='density', alpha=0.5)
+sns.histplot(data=df[df['property_type'] == 'flat'], x='price', color='orange', label='Flat', kde=True, stat='density', alpha=0.5)
+plt.legend()
+st.pyplot(fig)
