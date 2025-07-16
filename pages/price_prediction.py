@@ -11,7 +11,7 @@ pipeline = joblib.load('model.joblib')
 
 
 # Title section
-st.markdown("<h1 style='text-align: center; color: #2e8b57;'>🏙️ Gurgaon Property Price Predictor</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #2e8b57;'>Gurgaon Property Price Predictor</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; font-size: 16px;'>Enter property details to predict a real estate price range in ₹ Cr.</p>", unsafe_allow_html=True)
 st.markdown("---")
 
@@ -19,21 +19,21 @@ st.markdown("---")
 col1, col2 = st.columns(2)
 
 with col1:
-    property_type = st.selectbox('🏠 Property Type', ['flat', 'house'])
-    bedroom = float(st.selectbox('🛏️ Bedrooms', sorted(df['bedRoom'].astype('int').unique().tolist())))
-    servant_room = st.selectbox('🧑‍🍳 Servant Room', ['Yes', 'No'])
-    luxury_type = st.selectbox('💎 Luxury Category', ['Low', 'Medium', 'High'])
+    property_type = st.selectbox('Property Type', ['flat', 'house'])
+    bedroom = float(st.selectbox('Bedrooms', sorted(df['bedRoom'].astype('int').unique().tolist())))
+    servant_room = st.selectbox('Servant Room', ['Yes', 'No'])
+    luxury_type = st.selectbox('Luxury Category', ['Low', 'Medium', 'High'])
 
 with col2:
-    sector = st.selectbox('📍 Sector', sorted(df['sector'].unique().tolist()))
-    bathroom = float(st.selectbox('🛁 Bathrooms', sorted(df['bathroom'].astype('int').unique().tolist())))
-    study_room = st.selectbox('📚 Study Room', ['Yes', 'No'])
-    area = float(st.number_input('📐 Built-Up Area (sqft)', min_value=0.0))
+    sector = st.selectbox('Sector', sorted(df['sector'].unique().tolist()))
+    bathroom = float(st.selectbox('Bathrooms', sorted(df['bathroom'].astype('int').unique().tolist())))
+    study_room = st.selectbox('Study Room', ['Yes', 'No'])
+    area = float(st.number_input('Built-Up Area (sqft)', min_value=0.0))
 
 st.markdown("")
 
 # Predict button
-if st.button('🔮 Predict Price'):
+if st.button('Predict Price'):
     data = pd.DataFrame({
         'sector': [sector],
         'property_type': [property_type],

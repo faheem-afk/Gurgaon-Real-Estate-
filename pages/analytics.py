@@ -29,7 +29,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.header('Feature Cloud')
 word_cloud_df = pd.read_csv("datasets/word_cloud_df.csv")
-sector = st.selectbox('📍 Sector', sorted(word_cloud_df['sector'].unique().tolist()))
+sector = st.selectbox('Sector', sorted(word_cloud_df['sector'].unique().tolist()))
 feature_text = []
 for i in word_cloud_df[word_cloud_df['sector'] == sector]['features'].values:
     feature_text += map(lambda x: x.replace("\'", ""), i.replace("[", "",).replace("]", "").split(","))
@@ -44,7 +44,7 @@ st.pyplot(fig)
 
 
 st.header("Area Vs Price")
-property_type = st.selectbox('🏠 property_type', ['flat', 'house'])
+property_type = st.selectbox('property_type', ['flat', 'house'])
 df = pd.read_csv('datasets/gurgaon_properties_missing_value_imputed.csv')
 viz_df = df[df['property_type'] == property_type]
 fig = px.scatter(viz_df, x="builtUpArea", y='price', color='bedRoom', height=500)
@@ -52,7 +52,7 @@ st.plotly_chart(fig)
 
 
 st.header("BHK percentage per sector")
-sector = st.selectbox('📍 Sector', ['Overall'] + sorted(df['sector'].unique()))
+sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()))
 if sector == "Overall":
     fig = px.pie(df, names='bedRoom')
 else:
@@ -63,7 +63,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 st.header("Price variation per BHK")
-property_type = st.selectbox('🏠 property_type', ['Overall', 'flat', 'house'])
+property_type = st.selectbox('property_type', ['Overall', 'flat', 'house'])
 if property_type == "Overall":
     temp_df = df[df['bedRoom'] <= 4]
 else:
@@ -75,7 +75,6 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 st.header("Price Distribution")
-
 fig = plt.figure(figsize=(6, 4))
 sns.histplot(data=df[df['property_type'] == 'house'], x='price', color='blue', label='House', kde=True, stat='density', alpha=0.5)
 sns.histplot(data=df[df['property_type'] == 'flat'], x='price', color='orange', label='Flat', kde=True, stat='density', alpha=0.5)
