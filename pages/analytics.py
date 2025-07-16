@@ -52,22 +52,22 @@ st.plotly_chart(fig)
 
 
 st.header("BHK percentage per sector")
-sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()), key="sector_1_selector")
-if sector == "Overall":
+sector_1 = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()), key="sector_1_selector")
+if sector_1 == "Overall":
     fig = px.pie(df, names='bedRoom')
 else:
-    pie_df = df[df['sector'] == sector]
+    pie_df = df[df['sector'] == sector_1]
     fig = px.pie(pie_df, names='bedRoom')
 
 st.plotly_chart(fig, use_container_width=True)
 
 
 st.header("Price variation per BHK")
-sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique(), key="sector_2_selector"))
-if sector == "Overall":
+sector_2 = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique(), key="sector_2_selector"))
+if sector_2 == "Overall":
     temp_df = df[df['bedRoom'] <= 4]
 else:
-    sector_specific_df = df[df['sector'] == sector]
+    sector_specific_df = df[df['sector'] == sector_2]
     temp_df = sector_specific_df[sector_specific_df['bedRoom'] <= 4]
 fig = px.box(temp_df, x='bedRoom', y='price')
 st.plotly_chart(fig, use_container_width=True)
