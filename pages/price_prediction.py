@@ -13,9 +13,10 @@ if 'result' not in st.session_state:
 df = pd.read_csv('df.csv')
 pipeline = joblib.load('model.joblib')
 
+
 # Title section
-st.markdown("<h1 style='text-align: center; color: #2e8b57;'>🏙️ Gurgaon Real Estate Price Prediction</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; font-size: 16px;'>Fill in the property details to get a predicted price range.</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #2e8b57;'>🏙️ Gurgaon Property Price Predictor</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 16px;'>Enter property details to predict a real estate price range in ₹ Cr.</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Input layout using columns
