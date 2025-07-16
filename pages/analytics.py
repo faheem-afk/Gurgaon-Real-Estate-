@@ -63,7 +63,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 st.header("Price variation per BHK")
-sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique(), key="sector_selector_variation"))
+sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()), key="sector_selector_variation")
 if sector == "Overall":
     temp_df = df[df['bedRoom'] <= 4]
 else:
