@@ -7,3 +7,4 @@ category_encoders==2.8.1
 xgboost==3.0.2
 plotly==6.2.0
 matplotlib==3.6.3
+wordcloud==1.9.4
