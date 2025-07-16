@@ -63,12 +63,12 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 st.header("Price variation per BHK")
-property_type = st.selectbox('property_type', ['Overall', 'flat', 'house'])
-if property_type == "Overall":
+sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()))
+if sector == "Overall":
     temp_df = df[df['bedRoom'] <= 4]
 else:
-    property_specific_df = df[df['property_type'] == property_type]
-    temp_df = property_specific_df[property_specific_df['bedRoom'] <= 4]
+    sector_specific_df = df[df['sector'] == sector]
+    temp_df = sector_specific_df[sector_specific_df['bedRoom'] <= 4]
 fig = px.box(temp_df, x='bedRoom', y='price')
 st.plotly_chart(fig, use_container_width=True)
 
