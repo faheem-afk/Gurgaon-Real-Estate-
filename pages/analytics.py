@@ -16,12 +16,12 @@ fig = px.scatter_mapbox(group_df, lat='latitude', lon='longitude', color='price_
 
 fig.update_layout(
     coloraxis_colorbar=dict(
-        x=.97,         # Pushes the colorbar to the right, outside the plot
+        x=.97,         
         xanchor="left",
-        len=0.75,       # Optional: vertical length
-        thickness=15    # Optional: bar width
+        len=0.75,       
+        thickness=15    
     ),
-    margin=dict(l=0, r=80, t=50, b=20)  # Increase right margin to avoid cutoff
+    margin=dict(l=0, r=80, t=50, b=20)  
 )
 
 st.plotly_chart(fig, use_container_width=True)
@@ -29,7 +29,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.header('Feature Cloud')
 word_cloud_df = pd.read_csv("datasets/word_cloud_df.csv")
-sector = st.selectbox('Sector', sorted(word_cloud_df['sector'].unique().tolist()))
+sector = st.selectbox('Sector', sorted(word_cloud_df['sector'].unique()))
 feature_text = []
 for i in word_cloud_df[word_cloud_df['sector'] == sector]['features'].values:
     feature_text += map(lambda x: x.replace("\'", ""), i.replace("[", "",).replace("]", "").split(","))
