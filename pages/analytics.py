@@ -29,7 +29,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.header('Feature Cloud')
 word_cloud_df = pd.read_csv("datasets/word_cloud_df.csv")
-sector = st.selectbox('Sector', sorted(word_cloud_df['sector'].unique()))
+sector = st.selectbox('Sector', sorted(word_cloud_df['sector'].unique()), key='sector_selector_cloud')
 feature_text = []
 for i in word_cloud_df[word_cloud_df['sector'] == sector]['features'].values:
     feature_text += map(lambda x: x.replace("\'", ""), i.replace("[", "",).replace("]", "").split(","))
@@ -52,22 +52,22 @@ st.plotly_chart(fig)
 
 
 st.header("BHK percentage per sector")
-sector_1 = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()), key="sector_1_selector")
-if sector_1 == "Overall":
+sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique()), key="sector_selector_bhk")
+if sector == "Overall":
     fig = px.pie(df, names='bedRoom')
 else:
-    pie_df = df[df['sector'] == sector_1]
+    pie_df = df[df['sector'] == sector]
     fig = px.pie(pie_df, names='bedRoom')
 
 st.plotly_chart(fig, use_container_width=True)
 
 
 st.header("Price variation per BHK")
-sector_2 = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique(), key="sector_2_selector"))
-if sector_2 == "Overall":
+sector = st.selectbox('Sector', ['Overall'] + sorted(df['sector'].unique(), key="sector_selector_variation"))
+if sector == "Overall":
     temp_df = df[df['bedRoom'] <= 4]
 else:
-    sector_specific_df = df[df['sector'] == sector_2]
+    sector_specific_df = df[df['sector'] == sector]
     temp_df = sector_specific_df[sector_specific_df['bedRoom'] <= 4]
 fig = px.box(temp_df, x='bedRoom', y='price')
 st.plotly_chart(fig, use_container_width=True)
