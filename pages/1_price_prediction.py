@@ -28,7 +28,7 @@ with col2:
     sector = st.selectbox('Sector', sorted(df['sector'].unique().tolist()))
     bathroom = float(st.selectbox('Bathrooms', sorted(df['bathroom'].astype('int').unique().tolist())))
     study_room = st.selectbox('Study Room', ['Yes', 'No'])
-    area = float(st.number_input('Built-Up Area (sqft)', min_value=0.0))
+    area = float(st.number_input('Built-Up Area (sqft)', min_value=100.0))
 
 st.markdown("")
 
