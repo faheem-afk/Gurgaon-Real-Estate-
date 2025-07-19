@@ -1,52 +1,55 @@
 import streamlit as st
-import seaborn as sns
 import pandas as pd
-import numpy as np
 from st_aggrid import GridOptionsBuilder, AgGrid
+from utils import recommend_properties_with_finalSimValue
 
 if 'results' in st.session_state:
     pass
 else:
     st.session_state['results'] = ''
 
-
+if 'trigger' in st.session_state:
+    pass
+else:
+    st.session_state['trigger'] = False
+    
+     
 st.set_page_config("Recommender Appartments")
 
 location_df = pd.read_csv("datasets/location_df.csv")
-df = pd.read_excel("datasets/real_estate_data.xlsx")
 
 st.title("Select Landmark and Range")
 landmark = st.selectbox('Landmark', sorted(location_df.columns.unique()))
 radius = float(st.number_input('Range(Km)', min_value=0.1, max_value=54.0))
 
+
 if st.button('Search'):
     if radius == 54:
         st.session_state['results'] = location_df[location_df[landmark] < radius][['PropertyName', landmark]].sort_values(by=landmark)
+        if len(st.session_state['results']) > 0:
+            st.session_state['trigger'] = True
+            pass
+        else:
+            st.write("No such Property!")
     else:   
         st.session_state['results'] = location_df[location_df[landmark] <= radius][['PropertyName', landmark]].sort_values(by=landmark)
-
-li_property_names = df['PropertyName'].tolist()
-
-final_sim = pd.read_csv('datasets/final_sim.csv').to_numpy()
-
-def recommend_properties_with_finalSimValue(x:str):
-    ind = li_property_names.index(x)
-    sims = final_sim[ind].tolist()
-    numbered_sims = list(enumerate(sims))
-    closer = sorted(numbered_sims, key=lambda x: x[1], reverse=True)[1:6]
-    indices = []
-    for idx, _ in closer:
-        indices.append(idx)
-    return df[['PropertyName']].loc[indices]
+        if len(st.session_state['results']) > 0:
+            st.session_state['trigger'] = True
+            pass
+        else:
+            st.write("No such Property!")
 
 
-if isinstance(st.session_state['results'], pd.DataFrame) and not st.session_state['results'].empty:
+if isinstance(st.session_state['results'], pd.DataFrame) \
+    and  not isinstance(st.session_state['results'], str) \
+    and st.session_state['trigger'] == True:
+
     gb = GridOptionsBuilder.from_dataframe(st.session_state['results'])
-    gb.configure_selection('single')  # single row selection
+    gb.configure_selection('single')  
     
     columns = st.session_state['results'].columns.tolist()
     
-    gb.configure_column(columns[1], flex=300)
+    gb.configure_column(columns[1], flex=3)
     
     grid_options = gb.build()
 
@@ -55,6 +58,7 @@ if isinstance(st.session_state['results'], pd.DataFrame) and not st.session_stat
     n_rows = len(st.session_state['results'])
     
     grid_height = max(120, row_height * (n_rows + 1)) 
+    
     grid_response = AgGrid(
         st.session_state['results'],
         gridOptions=grid_options,
@@ -70,5 +74,14 @@ if isinstance(st.session_state['results'], pd.DataFrame) and not st.session_stat
         prop_name = selected['PropertyName'].values[0]
         similar_props = recommend_properties_with_finalSimValue(prop_name).reset_index(drop=True)
         st.write(similar_props)
+        st.session_state['trigger'] = False
         
+    
+    
+    
+    
+    
+    
+    
+    
     
