@@ -1,19 +1,13 @@
 import streamlit as st
 import pandas as pd
 from st_aggrid import GridOptionsBuilder, AgGrid
-from utils import recommend_properties_with_finalSimValue
+from utils import recommend_properties_with_finalSimValue, get_hash
 
 if 'results' in st.session_state:
     pass
 else:
     st.session_state['results'] = ''
 
-if 'trigger' in st.session_state:
-    pass
-else:
-    st.session_state['trigger'] = False
-    
-     
 st.set_page_config("Recommender Appartments")
 
 location_df = pd.read_csv("datasets/location_df.csv")
@@ -39,10 +33,10 @@ if st.button('Search'):
         else:
             st.write("No such Property!")
 
-
 if isinstance(st.session_state['results'], pd.DataFrame) \
-    and  not isinstance(st.session_state['results'], str) \
-    and st.session_state['trigger'] == True:
+    and not isinstance(st.session_state['results'], str):
+    
+    dynamic_key = f"aggrid_{get_hash(st.session_state['results'])}"
 
     gb = GridOptionsBuilder.from_dataframe(st.session_state['results'])
     gb.configure_selection('single')  
@@ -64,24 +58,23 @@ if isinstance(st.session_state['results'], pd.DataFrame) \
         gridOptions=grid_options,
         height=grid_height,
         width='100%',
-        key="aggrid_1"
+        key=dynamic_key
     )
 
     selected = grid_response['selected_rows']
-
-    if selected is not None:    
+    
+    if selected is not None :    
         st.header("Recommendations")
         prop_name = selected['PropertyName'].values[0]
         similar_props = recommend_properties_with_finalSimValue(prop_name).reset_index(drop=True)
         st.write(similar_props)
-        st.session_state['trigger'] = False
         
-    
-    
-    
-    
-    
-    
-    
-    
-    
+            
+        
+        
+        
+        
+        
+        
+        
+        

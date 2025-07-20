@@ -1,4 +1,5 @@
 import pandas as pd
+import hashlib
 
 df = pd.read_excel("datasets/real_estate_data.xlsx")
 
@@ -16,3 +17,7 @@ def recommend_properties_with_finalSimValue(x:str):
     for idx, _ in closer:
         indices.append(idx)
     return df[['PropertyName']].loc[indices]
+
+
+def get_hash(df):
+    return hashlib.md5(pd.util.hash_pandas_object(df, index=True).values).hexdigest()
