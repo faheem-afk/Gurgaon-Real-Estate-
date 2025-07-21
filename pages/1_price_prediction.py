@@ -7,7 +7,7 @@ import joblib
 if 'results' in st.session_state:
     pass
 else:
-    st.session_state['results'] = ''
+    st.session_state['results'] = 0
     
 st.set_page_config(page_title='prediction page', layout="centered")
 
@@ -58,7 +58,7 @@ if st.button('Predict Price'):
 
     st.session_state.results = f"💰 The predicted price for the **{property_type}** is between **₹{low} Cr** and **₹{high} Cr**."
     
-if not isinstance(st.session_state.results, str):
+if isinstance(st.session_state.results, str):
     st.success(st.session_state.results)
     
 
