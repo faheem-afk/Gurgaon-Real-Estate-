@@ -56,9 +56,9 @@ if st.button('Predict Price'):
     low = round(pred - 0.24, 2)
     high = round(pred + 0.24, 2)
 
-    st.session_state.result = f"💰 The predicted price for the **{property_type}** is between **₹{low} Cr** and **₹{high} Cr**."
+    st.session_state.results = f"💰 The predicted price for the **{property_type}** is between **₹{low} Cr** and **₹{high} Cr**."
     
-st.success(st.session_state.result)
+st.success(st.session_state.results)
     
 
 
