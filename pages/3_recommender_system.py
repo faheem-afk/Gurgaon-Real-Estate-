@@ -20,21 +20,11 @@ radius = float(st.number_input('Range(Km)', min_value=0.1, max_value=54.0))
 if st.button('Search'):
     if radius == 54:
         st.session_state['results'] = location_df[location_df[landmark] < radius][['PropertyName', landmark]].sort_values(by=landmark)
-        if len(st.session_state['results']) > 0:
-            st.session_state['trigger'] = True
-            pass
-        else:
-            st.write("No such Property!")
+       
     else:   
         st.session_state['results'] = location_df[location_df[landmark] <= radius][['PropertyName', landmark]].sort_values(by=landmark)
-        if len(st.session_state['results']) > 0:
-            st.session_state['trigger'] = True
-            pass
-        else:
-            st.write("No such Property!")
 
-if isinstance(st.session_state['results'], pd.DataFrame) \
-    and not isinstance(st.session_state['results'], str):
+if isinstance(st.session_state['results'], pd.DataFrame):
     
     dynamic_key = f"aggrid_{get_hash(st.session_state['results'])}"
 
