@@ -58,7 +58,7 @@ if st.button('Predict Price'):
 
     st.session_state.results = f"💰 The predicted price for the **{property_type}** is between **₹{low} Cr** and **₹{high} Cr**."
     
-if not st.session_state.results == "":
+if not st.session_state.results.empty():
     st.success(st.session_state.results)
     
 
