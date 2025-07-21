@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 import joblib
 
+
+if 'results' in st.session_state:
+    pass
+else:
+    st.session_state['results'] = ''
+    
 st.set_page_config(page_title='prediction page', layout="centered")
 
 # Load data & model
@@ -51,7 +57,9 @@ if st.button('Predict Price'):
     high = round(pred + 0.24, 2)
 
     st.session_state.result = f"💰 The predicted price for the **{property_type}** is between **₹{low} Cr** and **₹{high} Cr**."
-    st.success(st.session_state.result)
+    
+st.success(st.session_state.result)
+    
 
 
     
