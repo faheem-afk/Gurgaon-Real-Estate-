@@ -1,0 +1,17 @@
+[server]
+enableCORS = false
+enableXsrfProtection = false
+
+[runner]
+fastReruns = true
+
+[client]
+showErrorDetails = true
+
+[theme]
+base = "light"
+backgroundColor = "#FAFAF8"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1A1A1A"
+primaryColor = "#1D9E75"
+font = "sans serif"
